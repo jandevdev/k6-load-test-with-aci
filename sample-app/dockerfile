@@ -1,14 +1,9 @@
-FROM python:3.8
+from python:3.8
 
-RUN mkdir /sample-app/
-COPY ./requirements.txt /sample-app/
-COPY ./app.py ./sample-app/app.py
+WORKDIR /app
+COPY . .
 
-RUN pip install --upgrade pip
-# RUN pip install -e .
-RUN pip3 install -r /sample-app/requirements.txt
+RUN pip install -r requirements.txt
 
-WORKDIR /sample-app/
-
-# EXPOSE 8080
-CMD [ "python", "-u", "app.py" ]
+ENTRYPOINT [ "python" ]
+CMD [ "app.py" ]
