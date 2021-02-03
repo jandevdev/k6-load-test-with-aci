@@ -126,3 +126,8 @@ az pipelines create --name $PIPELINE_NAME_K6 --repository $REPOSITORY_NAME \
 
 
 ## Publishing test results to Azure DevOps
+
+
+## Running Locally
+docker run --net=host k6
+Add flag
