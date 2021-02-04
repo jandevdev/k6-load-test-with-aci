@@ -42,7 +42,7 @@ steps:
   - task: AzureCLI@2
     displayName: 'Push Image to ACR'
     inputs:
-      azureSubscription: parameters.azure_subscription
+      azureSubscription: ${{ parameters.azure_subscription }}
       scriptType: bash
       scriptLocation: inlineScript
       inlineScript: |
