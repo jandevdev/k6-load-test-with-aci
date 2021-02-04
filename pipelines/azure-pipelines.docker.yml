@@ -7,10 +7,10 @@ pool:
   vmImage: 'ubuntu-latest'
 
 # parameters:
-  # - name: azure_subscription
-  #   type: string
-  #   default: ""
-  #   displayName: Azure Subscription
+#   - name: azure_subscription
+#     type: string
+#     default: ""
+#     displayName: Azure Subscription
 
 #   - name: docker_image
 #     type: string
@@ -39,35 +39,31 @@ pool:
 #         echo ----- BUILD IMAGE ------------
 #         docker build -t sample-application:latest -f ./sample-app/dockerfile .
 
-  # - task: AzureCLI@2
-  #   displayName: 'Push Image to ACR'
-  #   inputs:
-  #     azureSubscription: ${{ parameters.azure_subscription }}
-  #     scriptType: bash
-  #     scriptLocation: inlineScript
-  #     inlineScript: |
-  #       set -e
-  #       az acr login --name ${{ parameters.acr_name }}
-  #       docker tag ${{ parameters.docker_image}}:latest ${{ variables.container_image }}
-  #       docker push ${{ variables.container_image }}
+#   - task: AzureCLI@2
+#     displayName: 'Push Image to ACR'
+#     inputs:
+#       azureSubscription: ${{ parameters.azure_subscription }}
+#       scriptType: bash
+#       scriptLocation: inlineScript
+#       inlineScript: |
+#         set -e
+#         az acr login --name ${{ parameters.acr_name }}
+#         docker tag ${{ parameters.docker_image}}:latest ${{ variables.container_image }}
+#         docker push ${{ variables.container_image }}
 
 
 variables:
 - group: k6_loadtesting_group
 
 steps:
-- task: Docker@2
-  displayName: Login to ACR
-  inputs:
-    command: login
-    containerRegistry: $(acr_name)
     
 - task: Docker@2
   displayName: Build and Push Docker Image for Sample App
   inputs:
     Dockerfile: /sample-app/dockerfile
     command: buildAndPush
-    repository: $(image_name)
+    repository: $(acr_name)
+    containerRegistry: $(acr_svc)
     tags: |
       v$(Build.BuildId)
       latest
