@@ -37,7 +37,7 @@ steps:
         echo $current_utc_date
 
         echo ----- BUILD IMAGE ------------
-        docker build -t ${{ parameters.docker_image}}:latest -f ./sample-app/dockerfile . # TODO: confirm Dockerfile location before merge
+        docker build -t sample-application:latest -f ./sample-app/dockerfile .
 
   - task: AzureCLI@2
     displayName: 'Push Image to ACR'
