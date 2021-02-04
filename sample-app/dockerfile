@@ -1,7 +1,7 @@
 FROM python:3.8-slim-buster
 
 WORKDIR /app
-COPY ./sample-app/ .
+COPY . .
 RUN pwd
 RUN ls
 RUN pip install -r requirements.txt

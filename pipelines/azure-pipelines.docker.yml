@@ -56,7 +56,11 @@ variables:
 - group: k6_loadtesting_group
 
 steps:
-    
+ 
+- script: |
+      ls
+  displayName: 'List working dir'
+
 - task: Docker@2
   displayName: Build and Push Docker Image for Sample App
   inputs:
