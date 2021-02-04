@@ -60,7 +60,7 @@ steps:
 - task: Docker@2
   displayName: Build and Push Docker Image for Sample App
   inputs:
-    Dockerfile: /sample-app/dockerfile
+    Dockerfile: $(Build.SourcesDirectory)/app/dockerfile
     command: buildAndPush
     repository: $(acr_name)
     containerRegistry: $(acr_svc)
