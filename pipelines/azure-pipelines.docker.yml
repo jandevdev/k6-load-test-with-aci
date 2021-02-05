@@ -29,8 +29,5 @@ steps:
     scriptLocation: inlineScript
     inlineScript: |
       echo "============== Creating Azure Container Instance ================="
-      # az container create --resource-group ${{ parameters.resource_group }} --file build/deploy-aci-out.yaml
-      # az container start --name ${{ variables.container_group_name }} --resource-group ${{ parameters.resource_group }}
-
-      az container create --name $(aci_name) --resource-group $(resource_group) --image $(acr_name).azurecr.io/$(acr_name):latest \
+      az container create --name $(aci_name) -g $(resource_group) --image $(acr_name).azurecr.io/$(acr_name):latest \
       --registry-login-server $(acr_name) --registry-username $(acr_name) -n --registry-password $(acr_pswd) --dns-name-label $(aci_name)-01234 --query ipAddress.fqdn
