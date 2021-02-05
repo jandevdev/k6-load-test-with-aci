@@ -24,7 +24,7 @@ steps:
 - task: AzureCLI@2
   displayName: "Deploy Perf Test App to ACI"
   inputs:
-    azureSubscription: $(acr_svc)
+    azureSubscription: $(acr-sp-svc)
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
