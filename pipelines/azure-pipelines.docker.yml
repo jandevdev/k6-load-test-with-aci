@@ -25,7 +25,7 @@ steps:
   displayName: "Deploy Perf Test App to ACI"
   env:
     inputs:
-        azureSubscription: parameters.azure_subscription
+        azureSubscription: $(acr_svc)
         scriptType: bash
         scriptLocation: inlineScript
         inlineScript: |
