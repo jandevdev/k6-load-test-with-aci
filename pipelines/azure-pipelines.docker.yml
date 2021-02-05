@@ -22,12 +22,15 @@ steps:
       latest
 
 - task: AzureCLI@2
-  displayName: "Deploy Perf Test App to ACI"
+  displayName: "Deploy Sample App to ACI"
   inputs:
     azureSubscription: $(acr_sp_svc)
     scriptType: bash
     scriptLocation: inlineScript
     inlineScript: |
       echo "============== Creating Azure Container Instance ================="
-      az container create --name $(aci_name) --resource-group $(resource_group) --image $(acr_name).azurecr.io/$(acr_name):latest \
-      --registry-login-server $(acr_name).azurecr.io --registry-username $(acr_name) --registry-password $(acr_pswd) --dns-name-label $(aci_name)-01234 --query ipAddress.fqdn
+      az container create --name $(aci_name) --resource-group $(resource_group) \ 
+      --image $(acr_name).azurecr.io/$(acr_name):latest --registry-login-server $(acr_name).azurecr.io \
+      --registry-username $(acr_name) --registry-password $(acr_pswd) \
+      --dns-name-label $(aci_name)-1234 --query ipAddress.fqdn
+      az container start --name $(aci_name) --resource-group $(resource_group)
